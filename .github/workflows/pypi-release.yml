@@ -19,6 +19,7 @@ jobs:
     environment:
       name: pypi
       url: https://pypi.org/p/pywiegandpi
+    needs: check-and-build-package
     permissions:
       id-token: write
     steps:
