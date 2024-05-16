@@ -7,6 +7,12 @@ on:
       - "main"
 
 jobs:
+  check-and-build-package:
+    name: Build & inspect our package.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hynek/build-and-inspect-python-package@v2
   pypi-publish:
     name: Upload release to PyPI
     runs-on: ubuntu-latest
@@ -16,9 +22,5 @@ jobs:
     permissions:
       id-token: write
     steps:
-    - name: Install dependencies
-      run: pip install build
-    - name: Build package
-      run: python -m build
     - name: Publish package distributions to PyPI
       uses: pypa/gh-action-pypi-publish@release/v1
