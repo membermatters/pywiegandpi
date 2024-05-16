@@ -7,8 +7,8 @@ on:
       - "main"
 
 jobs:
-  check-and-build-package:
-    name: Build & inspect our package.
+  build-package:
+    name: Build our package.
     runs-on: ubuntu-latest
     environment:
       name: release
@@ -22,9 +22,14 @@ jobs:
     environment:
       name: release
       url: https://pypi.org/p/pywiegandpi
-    needs: check-and-build-package
+    needs: build-package
     permissions:
       id-token: write
     steps:
+    - name: Download packages built by previous step
+      uses: actions/download-artifact@v4
+      with:
+        name: Packages
+        path: dist
     - name: Publish package distributions to PyPI
       uses: pypa/gh-action-pypi-publish@release/v1
