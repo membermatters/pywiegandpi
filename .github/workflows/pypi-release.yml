@@ -10,6 +10,9 @@ jobs:
   check-and-build-package:
     name: Build & inspect our package.
     runs-on: ubuntu-latest
+    environment:
+      name: release
+      url: https://pypi.org/p/pywiegandpi
     steps:
       - uses: actions/checkout@v4
       - uses: hynek/build-and-inspect-python-package@v2
@@ -17,7 +20,7 @@ jobs:
     name: Upload release to PyPI
     runs-on: ubuntu-latest
     environment:
-      name: pypi
+      name: release
       url: https://pypi.org/p/pywiegandpi
     needs: check-and-build-package
     permissions:
