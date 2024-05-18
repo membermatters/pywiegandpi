@@ -71,7 +71,7 @@ class WiegandDecoder:
                         card_mask_26bit = 0b0_00000000_11111111_11111111_11111111_0
                         card_mask_34bit = 0b0_11111111_11111111_11111111_11111111_0
                         card_mask = card_mask_34bit if self.wiegand_32bit_mode else card_mask_26bit
-                        card_uid = self.num & card_mask >> 1  # strip off the remaining parity bit
+                        card_uid = (self.num & card_mask) >> 1  # strip off the remaining parity bit
                         self.callback(self.bits, card_uid)
 
     def cancel(self):
